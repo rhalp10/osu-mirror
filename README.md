@@ -1,7 +1,7 @@
 # osu!mirror
 yet another beatmap mirror for osu!
 
-written in pure js, using some phantomjs for authentication and yeah.
+written in pure js and can run even on your potato
 
 ## setting up
 
@@ -14,6 +14,7 @@ mkdir maps
 mkdir maps/elab
 mkdir maps/out
 mkdir maps/test
+npm install
 ```
 
 ## running
