@@ -1,0 +1,29 @@
+{
+  "name": "osu!mirror",
+  "version": "0.0.1",
+  "description": "Yet another osu! beatmap mirror",
+  "author": "Howl <the@howl.moe>",
+  "contributors": [{
+    "name": "Howl",
+    "email": "the@howl.moe"
+  }],
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TheHowl/osu-mirror"
+  },
+  "bugs": {
+    "url": "https://github.com/TheHowl/osu-mirror/issues"
+  },
+  "keywords": [
+    "osu!"
+  ],
+  "dependencies": {
+    "request": "2.55.0",
+    "isbinaryfile": "2.0.4",
+    "sanitize-filename": "1.3.0"
+  },
+  "preferGlobal": false,
+  "private": false,
+  "license": "MIT"
+}
