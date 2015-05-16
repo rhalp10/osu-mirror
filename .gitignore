@@ -1,6 +1,4 @@
 config.js
 maps
 node_modules
-!maps/elab/.keep
-!maps/out/.keep
-!maps/test/.keep
+!.keep
