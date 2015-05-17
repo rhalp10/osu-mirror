@@ -1,7 +1,6 @@
 // The actual mirror that starts after a connection to the osu! has been enstabilished and confirmed.
 
 var mysql = require("mysql")
-var deasync = require("deasync")
 var sanitize = require("sanitize-filename")
 
 var fs
@@ -15,6 +14,7 @@ var addMap = function(arr, consec) {
     connection.query("UPDATE `" + config.mysqlDatabase + "`.`stats` SET `current_map_id`=? WHERE 1", arr[0] + 1, function(){})
     getMap(consec)
 }
+
 var getMap = function(consec) {
     consec = typeof consec !== "undefined" ? consec : 0
     connection.query("SELECT * FROM `" + config.mysqlDatabase + "`.`stats` WHERE 1", function(error, rows, fields) {
@@ -35,15 +35,18 @@ var getMap = function(consec) {
                     var act_exist = "1"
                     console.log("done. checking download worked...")
                     var ibf = require("isbinaryfile")
-                    if (!ibf("maps/out/" + filename + ".osz")) {
+                    if (!ibf("maps/elab/" + filename + ".osz")) {
                         console.log("Something went wrong. The test beatmap isn't a binary file. Perhaps the beatmap download got removed?")
                         act_exist = "0"
-                        fs.unlink("maps/out/" + filename + ".osz")
+                        fs.unlink("maps/elab/" + filename + ".osz")
+                    }
+                    else {
+                        fs.rename("maps/elab/" + filename + ".osz", "maps/out/" + filename + ".osz")
                     }
                     console.log("completed beatmap " + filename)
                     mightbeupdated = body[0].approved > 0 ? "0" : "1"
                     addMap([maptoget, filename + ".osz", body[0].last_update, act_exist, mightbeupdated, "0"], 0)
-                }).pipe(fs.createWriteStream("maps/out/" + filename + ".osz"))
+                }).pipe(fs.createWriteStream("maps/elab/" + filename + ".osz"))
             }
         })
     })
