@@ -45,7 +45,15 @@ var getMap = function(consec) {
                 addMap([maptoget, "", "0000-00-00 00:00:00", "0", "0", "0"], consec + 1)
             }
             else {
-                body = JSON.parse(body)
+                try {
+                    body = JSON.parse(body)
+                }
+                catch (ex) {
+                    console.log("Seems like cloudflare has meme'd us. Let's try again in 30 seconds.")
+                    setTimeout(function() {
+                        getMap(consec)
+                    }, 30000)
+                }
                 var filename = sanitize(maptoget + " " + body[0].artist + " - " + body[0].title)
                 console.log("Starting download of " + filename)
                 request("https://osu.ppy.sh/d/" + maptoget, function(err) {
