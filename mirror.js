@@ -36,7 +36,7 @@ var getMap = function(consec) {
                     console.log("done. checking download worked...")
                     var ibf = require("isbinaryfile")
                     if (!ibf("maps/elab/" + filename + ".osz")) {
-                        console.log("Something went wrong. The test beatmap isn't a binary file. Perhaps the beatmap download got removed?")
+                        console.log("Beatmap " + maptoget + " isn't a binary file. Perhaps the beatmap download got removed?")
                         act_exist = "0"
                         fs.unlink("maps/elab/" + filename + ".osz")
                     }
