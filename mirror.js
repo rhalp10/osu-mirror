@@ -15,8 +15,26 @@ var addMap = function(arr, consec) {
     getMap(consec)
 }
 
+var fixAndClose = function() {
+    // dat nesting tho
+    // TODO: I need to think better if it's better to have 31 or 30 if this happens on consec == 30.
+    // but logic is not for me at the moment, so I'll just go with what my instinct tells for now.
+    connection.query("SELECT `id` FROM `" + config.mysqlDatabase + "`.`maps` ORDER BY `maps`.`id` DESC LIMIT 1", function(error, rows, fields) {
+        connection.query("DELETE FROM `" + config.mysqlDatabase + "`.`maps` WHERE `id` > ?", [fields[0].id - 31], function(){
+            connection.query("UPDATE `" + config.mysqlDatabase + "`.`stats` SET `current_map_id` = `current_map_id` - 31 WHERE 1", function() {
+                // LET THE ENDLESS RECURSION AND CALLBACKING STOP
+                process.exit()
+            })
+        })
+    })
+}
+
 var getMap = function(consec) {
     consec = typeof consec !== "undefined" ? consec : 0
+    // I won't believe you if you tell me more than thirty maps in a row have been deleted.
+    if (consec == 30) {
+        fixAndClose()
+    }
     connection.query("SELECT * FROM `" + config.mysqlDatabase + "`.`stats` WHERE 1", function(error, rows, fields) {
         if (error) throw error
         if (rows.length !== 1) throw ""
@@ -34,7 +52,6 @@ var getMap = function(consec) {
                     if (err) console.log("Something went horribly wrong when trying to download mapset " + maptoget + "!")
                     var act_exist = "1"
                     console.log("done. checking download worked...")
-                    var ibf = require("isbinaryfile")
                     if (!ibf("maps/elab/" + filename + ".osz")) {
                         console.log("Beatmap " + maptoget + " isn't a binary file. Perhaps the beatmap download got removed?")
                         act_exist = "0"
