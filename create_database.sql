@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS `maps` (
   `id` int(11) NOT NULL,
-  `name` varchar(128) NOT NULL,
+  `name` varchar(600) NOT NULL,
   `saved_version` datetime NOT NULL,
   `act_exist` tinyint(1) NOT NULL,
   `mightbeupdated` tinyint(1) NOT NULL,
