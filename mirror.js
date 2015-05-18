@@ -69,7 +69,7 @@ var getMap = function(consec) {
                         fs.rename("maps/elab/" + filename + ".osz", "maps/out/" + filename + ".osz")
                     }
                     console.log("completed beatmap " + filename)
-                    mightbeupdated = body[0].approved > 0 ? "0" : "1"
+                    mightbeupdated = (body[0].approved > 0 && body[0].approved != 3) ? "0" : "1"
                     addMap([maptoget, filename + ".osz", body[0].last_update, act_exist, mightbeupdated, "0"], 0)
                 }).pipe(fs.createWriteStream("maps/elab/" + filename + ".osz"))
             }
