@@ -57,26 +57,25 @@ var getMap = function(consec) {
                 var filename = sanitize(maptoget + " " + body[0].artist + " - " + body[0].title)
                 console.log("Starting download of " + filename)
                 request("https://osu.ppy.sh/d/" + maptoget, function(err) {
-                    while (true) {
-                        if (fs.accessSync("maps/elab/" + filename + ".osz")) {
-                            break
-                            if (err)
-                                console.log("Something went horribly wrong when trying to download mapset " + maptoget + "!")
+                    // why, you might say?
+                    // 1. I/O is slow
+                    // 2. Slow down requests per minute to server
+                    setTimeout(function() {
+                        if (err) console.log("Something went horribly wrong when trying to download mapset " + maptoget + "!")
                             var act_exist = "1"
-                            console.log("done. checking download worked...")
-                            if (!ibf("maps/elab/" + filename + ".osz")) {
-                                console.log("Beatmap " + maptoget + " isn't a binary file. Perhaps the beatmap download got removed?")
-                                act_exist = "0"
-                                fs.unlink("maps/elab/" + filename + ".osz")
-                            }
-                            else {
-                                fs.rename("maps/elab/" + filename + ".osz", "maps/out/" + filename + ".osz")
-                            }
-                            console.log("completed beatmap " + filename)
-                            mightbeupdated = (body[0].approved > 0 && body[0].approved != 3) ? "0" : "1"
-                            addMap([maptoget, filename + ".osz", body[0].last_update, act_exist, mightbeupdated, "0"], 0)
+                        console.log("done. checking download worked...")
+                        if (!ibf("maps/elab/" + filename + ".osz")) {
+                            console.log("Beatmap " + maptoget + " isn't a binary file. Perhaps the beatmap download got removed?")
+                            act_exist = "0"
+                            fs.unlink("maps/elab/" + filename + ".osz")
                         }
-                    }
+                        else {
+                            fs.rename("maps/elab/" + filename + ".osz", "maps/out/" + filename + ".osz")
+                        }
+                        console.log("completed beatmap " + filename)
+                        mightbeupdated = (body[0].approved > 0 && body[0].approved != 3) ? "0" : "1"
+                        addMap([maptoget, filename + ".osz", body[0].last_update, act_exist, mightbeupdated, "0"], 0)
+                    }, 100)
                 }).pipe(fs.createWriteStream("maps/elab/" + filename + ".osz"))
             }
         })
