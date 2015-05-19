@@ -59,6 +59,7 @@ var getMap = function(consec) {
                 request("https://osu.ppy.sh/d/" + maptoget, function(err) {
                     while (true) {
                         if (fs.accessSync("maps/elab/" + filename + ".osz")) {
+                            break
                             if (err)
                                 console.log("Something went horribly wrong when trying to download mapset " + maptoget + "!")
                             var act_exist = "1"
@@ -74,7 +75,6 @@ var getMap = function(consec) {
                             console.log("completed beatmap " + filename)
                             mightbeupdated = (body[0].approved > 0 && body[0].approved != 3) ? "0" : "1"
                             addMap([maptoget, filename + ".osz", body[0].last_update, act_exist, mightbeupdated, "0"], 0)
-                            break
                         }
                     }
                 }).pipe(fs.createWriteStream("maps/elab/" + filename + ".osz"))
