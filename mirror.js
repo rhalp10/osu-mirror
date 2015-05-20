@@ -29,7 +29,7 @@ var fixAndClose = function() {
     })
 }
 
-var checkMap = function(filename, maptoget, body) {
+var checkMap = function(filename, maptoget, body, retries) {
     var act_exist = "1"
     try {
         if (!ibf("maps/elab/" + filename + ".osz")) {
@@ -43,7 +43,13 @@ var checkMap = function(filename, maptoget, body) {
     }
     catch (ex) {
         // Todo: add an if (ex instanceof ...) else throw ""
-        setTimeout(function() {checkMap(filename, maptoget, body)}, 1000)
+        
+        retries += 1
+        // if we've already retried a lot, then let's just get the map again and don't fuck around.
+        if (retries > 15)
+            getMap()
+        else
+            setTimeout(function() {checkMap(filename, maptoget, body)}, 1000)
     }
     console.log("completed beatmap " + filename)
     mightbeupdated = (body[0].approved > 0 && body[0].approved != 3) ? "0" : "1"
@@ -81,7 +87,7 @@ var getMap = function(consec) {
                     if (err)
                         console.log("Something went horribly wrong when trying to download mapset " + maptoget + "!")
                     console.log("done. checking download worked...")
-                    checkMap(filename, maptoget, body)
+                    checkMap(filename, maptoget, body, retries)
                 }).pipe(fs.createWriteStream("maps/elab/" + filename + ".osz"))
             }
         })
