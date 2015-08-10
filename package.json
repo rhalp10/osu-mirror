@@ -22,7 +22,6 @@
   ],
   "dependencies": {
     "isbinaryfile": "2.0.4",
-    "mysql": "*",
     "request": "2.55.0",
     "sanitize-filename": "1.3.0",
     "sqlite3": "^3.0.10"
