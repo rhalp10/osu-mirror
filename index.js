@@ -36,6 +36,6 @@ request.post({ url: "https://osu.ppy.sh/forum/ucp.php?mode=login", form: loginOb
       console.log("Something went wrong. The test beatmap isn't a binary file. Perhaps you wrote the wrong password?")
     }
     console.log("It seems to have worked! Now starting.")
-    mirror.mirrorStart(fs, request, config, ibf)
+    mirror.mirrorStart(request)
   }).pipe(fs.createWriteStream("maps/test/test-beatmap.osz"))
 })

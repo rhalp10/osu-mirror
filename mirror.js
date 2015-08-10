@@ -4,11 +4,11 @@ var sqlite3 = require("sqlite3")
 var db = new sqlite3.Database("osumirror.db")
 var sanitize = require("sanitize-filename")
 
-var fs
+var fs = require("fs")
+var config = require("./config")
+var ibf = require("isbinaryfile")
+// We're using the request module passed by index.js because that one is the one to have the cookie.
 var request
-var config
-var ibf
-var connection
 
 var addMap = function(arr, consec) {
   db.run("INSERT INTO `maps`(`id`, `name`, `saved_version`, `act_exist`, `mightbeupdated`, `retries`) VALUES (?, ?, ?, ?, ?, ?)", arr)
@@ -98,11 +98,8 @@ var getMap = function(consec) {
   })
 }
 
-exports.mirrorStart = function(fs1, request1, config1, ibf1) {
-  fs = fs1
-  request = request1
-  config = config1
-  ibf = ibf1
+exports.mirrorStart = function(r) {
+  request = r
   db.serialize(function() {
     getMap(0)
   });
