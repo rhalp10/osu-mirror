@@ -1,6 +1,7 @@
 // The actual mirror that starts after a connection to the osu! has been enstabilished and confirmed.
 
-var mysql = require("mysql")
+var sqlite3 = require("sqlite3")
+var db = new sqlite3.Database("osumirror.db")
 var sanitize = require("sanitize-filename")
 
 var fs
@@ -10,8 +11,8 @@ var ibf
 var connection
 
 var addMap = function(arr, consec) {
-  connection.query("INSERT INTO `" + config.mysqlDatabase + "`.`maps`(`id`, `name`, `saved_version`, `act_exist`, `mightbeupdated`, `retries`) VALUES (?, ?, ?, ?, ?, ?)", arr, function(){})
-  connection.query("UPDATE `" + config.mysqlDatabase + "`.`stats` SET `current_map_id`=? WHERE 1", arr[0] + 1, function(){})
+  db.run("INSERT INTO `maps`(`id`, `name`, `saved_version`, `act_exist`, `mightbeupdated`, `retries`) VALUES (?, ?, ?, ?, ?, ?)", arr)
+  db.run("UPDATE `stats` SET `current_map_id`=? WHERE 1", arr[0] + 1)
   getMap(consec)
 }
 
@@ -19,9 +20,9 @@ var fixAndClose = function() {
   // dat nesting tho
   // TODO: I need to think better if it's better to have 31 or 30 if this happens on consec == 30.
   // but logic is not for me at the moment, so I'll just go with what my instinct tells for now.
-  connection.query("SELECT `id` FROM `" + config.mysqlDatabase + "`.`maps` ORDER BY `maps`.`id` DESC LIMIT 1", function(error, rows, fields) {
-    connection.query("DELETE FROM `" + config.mysqlDatabase + "`.`maps` WHERE `id` > ?", [fields[0].id - 31], function(){
-      connection.query("UPDATE `" + config.mysqlDatabase + "`.`stats` SET `current_map_id` = `current_map_id` - 31 WHERE 1", function() {
+  db.all("SELECT `id` FROM `maps` ORDER BY `maps`.`id` DESC LIMIT 1", function(error, rows) {
+    db.run("DELETE FROM `maps` WHERE `id` > ?", [rows[0].id - 31], function(){
+      db.run("UPDATE `stats` SET `current_map_id` = `current_map_id` - 31 WHERE 1", function() {
         // LET THE ENDLESS RECURSION AND CALLBACKING STOP
         process.exit()
       })
@@ -62,7 +63,7 @@ var getMap = function(consec) {
   if (consec == 30) {
     fixAndClose()
   }
-  connection.query("SELECT * FROM `" + config.mysqlDatabase + "`.`stats` WHERE 1", function(error, rows, fields) {
+  db.all("SELECT * FROM `stats` WHERE 1", function(error, rows) {
     if (error) 
       throw error
     if (rows.length !== 1) 
@@ -102,14 +103,5 @@ exports.mirrorStart = function(fs1, request1, config1, ibf1) {
   request = request1
   config = config1
   ibf = ibf1
-  connection = mysql.createConnection({
-    host     : config.mysqlHost,
-    user     : config.mysqlUser,
-    password : config.mysqlPassword
-  })
-  connection.connect(function(err) {
-    if (err) 
-      throw err
-    getMap(0)
-  })
+  getMap(0)
 }
