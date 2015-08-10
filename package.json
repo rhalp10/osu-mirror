@@ -3,10 +3,12 @@
   "version": "0.0.1",
   "description": "Yet another osu! beatmap mirror",
   "author": "Howl <the@howl.moe>",
-  "contributors": [{
-    "name": "Howl",
-    "email": "the@howl.moe"
-  }],
+  "contributors": [
+    {
+      "name": "Howl",
+      "email": "the@howl.moe"
+    }
+  ],
   "main": "index.js",
   "repository": {
     "type": "git",
@@ -19,10 +21,10 @@
     "osu!"
   ],
   "dependencies": {
-    "request": "2.55.0",
     "isbinaryfile": "2.0.4",
+    "request": "2.55.0",
     "sanitize-filename": "1.3.0",
-    "mysql": "*"
+    "sqlite3": "^3.0.10"
   },
   "preferGlobal": false,
   "private": false,

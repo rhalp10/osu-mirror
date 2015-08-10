@@ -1,28 +1,31 @@
 # osu!mirror
-yet another beatmap mirror for osu!
 
-written in pure js and can run even on your potato
+I wanted to make my own mirror. As there was no open sourced osu! mirror software, I decided to write my own. So there it is, an osu! beatmap download mirror. nodejs masterrace btw.
 
-## setting up
+## setting things up
 
-edit config.js
-
-set up the database with create_database.sql
-
-```sh
+```
+git clone https://github.com/TheHowl/osu-mirror.git
+cd osu-mirror
+cp config.example.js config.js
+nano config.js
+npm install
 mkdir maps
 mkdir maps/elab
 mkdir maps/out
 mkdir maps/test
-npm install
+node make_db.js
 ```
 
 ## running
 
 ```sh
+tmux new
 node index.js
 ```
 
+You can then detach the session using CTRL+B - D. (press ctrl+b together, release them and then press D). And you can live your life happily.
+
 ## license
 
-mit
+MIT license
