@@ -21,11 +21,10 @@ var fixAndClose = function() {
   // TODO: I need to think better if it's better to have 31 or 30 if this happens on consec == 30.
   // but logic is not for me at the moment, so I'll just go with what my instinct tells for now.
   db.all("SELECT `id` FROM `maps` ORDER BY `maps`.`id` DESC LIMIT 1", function(error, rows) {
-    db.run("DELETE FROM `maps` WHERE `id` > ?", [rows[0].id - 31], function(){
-      db.run("UPDATE `stats` SET `current_map_id` = `current_map_id` - 31 WHERE 1", function() {
-        // LET THE ENDLESS RECURSION AND CALLBACKING STOP
-        process.exit()
-      })
+    db.run("DELETE FROM `maps` WHERE `id` > ?", [rows[0].id - 31])
+    db.run("UPDATE `stats` SET `current_map_id` = `current_map_id` - 31 WHERE 1", function() {
+      // LET THE ENDLESS RECURSION AND CALLBACKING STOP
+      process.exit()
     })
   })
 }
@@ -69,6 +68,7 @@ var getMap = function(consec) {
     if (rows.length !== 1) 
       throw ""
     maptoget = rows[0].current_map_id
+    console.log("We gotta get " + maptoget)
     request("https://osu.ppy.sh/api/get_beatmaps?k=" + config.apiKey + "&s=" + maptoget, function(err, response, body) {
       if (err !== null) 
         console.log("an error happened while downloading " + filename)
@@ -103,5 +103,7 @@ exports.mirrorStart = function(fs1, request1, config1, ibf1) {
   request = request1
   config = config1
   ibf = ibf1
-  getMap(0)
+  db.serialize(function() {
+    getMap(0)
+  });
 }
