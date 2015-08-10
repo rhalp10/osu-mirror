@@ -10,14 +10,16 @@ var ibf = require("isbinaryfile")
 // We're using the request module passed by index.js because that one is the one to have the cookie.
 var request
 
-var addMap = function(arr, consec) {
+var currentMapset;
+
+var addMap = function(arr) {
   db.run("INSERT INTO `maps`(`id`, `name`, `saved_version`, `act_exist`, `mightbeupdated`, `retries`) VALUES (?, ?, ?, ?, ?, ?)", arr)
-  db.run("UPDATE `stats` SET `current_map_id`=? WHERE 1", arr[0] + 1)
-  getMap(consec)
+  currentMapset += 1
+  db.run("UPDATE `stats` SET `current_map_id`=? WHERE 1", currentMapset)
+  getMap()
 }
 
 var fixAndClose = function() {
-  // dat nesting tho
   // TODO: I need to think better if it's better to have 31 or 30 if this happens on consec == 30.
   // but logic is not for me at the moment, so I'll just go with what my instinct tells for now.
   db.all("SELECT `id` FROM `maps` ORDER BY `maps`.`id` DESC LIMIT 1", function(error, rows) {
@@ -29,11 +31,11 @@ var fixAndClose = function() {
   })
 }
 
-var checkMap = function(filename, maptoget, body, retries) {
+var checkMap = function(filename, currentMapset, body, retries) {
   var act_exist = "1"
   try {
     if (!ibf("maps/elab/" + filename + ".osz")) {
-      console.log("Beatmap " + maptoget + " isn't a binary file. Perhaps the beatmap download got removed?")
+      console.log("Beatmap " + currentMapset + " isn't a binary file. Perhaps the beatmap download got removed?")
       act_exist = "0"
       fs.unlink("maps/elab/" + filename + ".osz")
     }
@@ -49,58 +51,50 @@ var checkMap = function(filename, maptoget, body, retries) {
     if (retries > 15)
       getMap()
     else
-      setTimeout(function() {checkMap(filename, maptoget, body, retries)}, 1000)
+      setTimeout(function() {checkMap(filename, currentMapset, body, retries)}, 1000)
   }
   console.log("completed beatmap " + filename)
   mightbeupdated = (body[0].approved > 0 && body[0].approved != 3) ? "0" : "1"
-  addMap([maptoget, filename + ".osz", body[0].last_update, act_exist, mightbeupdated, "0"], 0)
+  addMap([currentMapset, filename + ".osz", body[0].last_update, act_exist, mightbeupdated, "0"], 0)
 }
 
-var getMap = function(consec) {
-  consec = typeof consec !== "undefined" ? consec : 0
-  // I won't believe you if you tell me more than thirty maps in a row have been deleted.
-  if (consec == 30) {
-    fixAndClose()
-  }
-  db.all("SELECT * FROM `stats` WHERE 1", function(error, rows) {
-    if (error) 
-      throw error
-    if (rows.length !== 1) 
-      throw ""
-    maptoget = rows[0].current_map_id
-    console.log("We gotta get " + maptoget)
-    request("https://osu.ppy.sh/api/get_beatmaps?k=" + config.apiKey + "&s=" + maptoget, function(err, response, body) {
-      if (err !== null) 
-        console.log("an error happened while downloading " + filename)
-      if (body == "[]") {
-        addMap([maptoget, "", "0000-00-00 00:00:00", "0", "0", "0"], consec + 1)
+var getMap = function() {
+  console.log("We gotta get " + currentMapset)
+  request("https://osu.ppy.sh/api/get_beatmaps?k=" + config.apiKey + "&s=" + currentMapset, function(err, response, body) {
+    if (err !== null) 
+      console.log("an error happened while downloading " + filename)
+    if (body == "[]") {
+      addMap([currentMapset, "", "0000-00-00 00:00:00", "0", "0", "0"])
+    }
+    else {
+      try {
+        body = JSON.parse(body)
       }
-      else {
-        try {
-          body = JSON.parse(body)
-        }
-        catch (ex) {
-          console.log("Seems like cloudflare has meme'd us. Let's try again in 30 seconds.")
-          setTimeout(function() {
-            getMap(consec)
-          }, 30000)
-        }
-        var filename = sanitize(maptoget + " " + body[0].artist + " - " + body[0].title)
-        console.log("Starting download of " + filename)
-        request("https://osu.ppy.sh/d/" + maptoget, function(err) {
-          if (err)
-            console.log("Something went horribly wrong when trying to download mapset " + maptoget + "!")
-          console.log("done. checking download worked...")
-          checkMap(filename, maptoget, body, 0)
-        }).pipe(fs.createWriteStream("maps/elab/" + filename + ".osz"))
+      catch (ex) {
+        console.log("Seems like cloudflare has meme'd us. Let's try again in 30 seconds.")
+        setTimeout(function() {
+          getMap()
+        }, 30000)
       }
-    })
+      var filename = sanitize(currentMapset + " " + body[0].artist + " - " + body[0].title)
+      console.log("Starting download of " + filename)
+      request("https://osu.ppy.sh/d/" + currentMapset, function(err) {
+        if (err)
+          console.log("Something went horribly wrong when trying to download mapset " + currentMapset + "!")
+        console.log("done. checking download worked...")
+        checkMap(filename, currentMapset, body, 0)
+      }).pipe(fs.createWriteStream("maps/elab/" + filename + ".osz"))
+    }
   })
 }
 
 exports.mirrorStart = function(r) {
   request = r
-  db.serialize(function() {
-    getMap(0)
-  });
+  db.get("SELECT * FROM stats", function(err, row) {
+    if (err)
+      throw err
+    currentMapset = +(row.current_map_id)
+    console.log(currentMapset)
+    getMap()
+  })
 }
