@@ -10,24 +10,51 @@ var ibf = require("isbinaryfile")
 // We're using the request module passed by index.js because that one is the one to have the cookie.
 var request
 
-var currentMapset;
+var currentMapset
+var notExistingCount = 0
 
-var addMap = function(arr) {
-  db.run("INSERT INTO `maps`(`id`, `name`, `saved_version`, `act_exist`, `mightbeupdated`, `retries`) VALUES (?, ?, ?, ?, ?, ?)", arr)
-  currentMapset += 1
-  db.run("UPDATE `stats` SET `current_map_id`=? WHERE 1", currentMapset)
-  getMap()
+exports.mirrorStart = function(r) {
+  request = r
+  db.get("SELECT * FROM stats", function(err, row) {
+    if (err)
+      throw err
+    currentMapset = +(row.current_map_id)
+    getMap()
+  })
 }
 
-var fixAndClose = function() {
-  // TODO: I need to think better if it's better to have 31 or 30 if this happens on consec == 30.
-  // but logic is not for me at the moment, so I'll just go with what my instinct tells for now.
-  db.all("SELECT `id` FROM `maps` ORDER BY `maps`.`id` DESC LIMIT 1", function(error, rows) {
-    db.run("DELETE FROM `maps` WHERE `id` > ?", [rows[0].id - 31])
-    db.run("UPDATE `stats` SET `current_map_id` = `current_map_id` - 31 WHERE 1", function() {
-      // LET THE ENDLESS RECURSION AND CALLBACKING STOP
-      process.exit()
-    })
+var getMap = function() {
+  if (notExistingCount > 400) {
+    fixAndClose();
+  }
+  console.log("Starting download. s: " + currentMapset + "; notExistingCount: " + notExistingCount);
+  request("https://osu.ppy.sh/api/get_beatmaps?k=" + config.apiKey + "&s=" + currentMapset, function(err, response, body) {
+    if (err !== null) 
+      console.log("an error happened while downloading " + filename)
+    if (body == "[]") {
+      notExistingCount += 1
+      addMap([currentMapset, "", "0000-00-00 00:00:00", "0", "0", "0"])
+    }
+    else {
+      notExistingCount = 0
+      try {
+        body = JSON.parse(body)
+      }
+      catch (ex) {
+        console.log("Seems like cloudflare has meme'd us. Let's try again in 30 seconds.")
+        setTimeout(function() {
+          getMap()
+        }, 30000)
+      }
+      var filename = sanitize(currentMapset + " " + body[0].artist + " - " + body[0].title)
+      console.log("Starting download of " + filename)
+      request("https://osu.ppy.sh/d/" + currentMapset, function(err) {
+        if (err)
+          console.log("Something went horribly wrong when trying to download mapset " + currentMapset + "!")
+        console.log("done. checking download worked...")
+        checkMap(filename, currentMapset, body, 0)
+      }).pipe(fs.createWriteStream("maps/elab/" + filename + ".osz"))
+    }
   })
 }
 
@@ -58,43 +85,17 @@ var checkMap = function(filename, currentMapset, body, retries) {
   addMap([currentMapset, filename + ".osz", body[0].last_update, act_exist, mightbeupdated, "0"], 0)
 }
 
-var getMap = function() {
-  console.log("We gotta get " + currentMapset)
-  request("https://osu.ppy.sh/api/get_beatmaps?k=" + config.apiKey + "&s=" + currentMapset, function(err, response, body) {
-    if (err !== null) 
-      console.log("an error happened while downloading " + filename)
-    if (body == "[]") {
-      addMap([currentMapset, "", "0000-00-00 00:00:00", "0", "0", "0"])
-    }
-    else {
-      try {
-        body = JSON.parse(body)
-      }
-      catch (ex) {
-        console.log("Seems like cloudflare has meme'd us. Let's try again in 30 seconds.")
-        setTimeout(function() {
-          getMap()
-        }, 30000)
-      }
-      var filename = sanitize(currentMapset + " " + body[0].artist + " - " + body[0].title)
-      console.log("Starting download of " + filename)
-      request("https://osu.ppy.sh/d/" + currentMapset, function(err) {
-        if (err)
-          console.log("Something went horribly wrong when trying to download mapset " + currentMapset + "!")
-        console.log("done. checking download worked...")
-        checkMap(filename, currentMapset, body, 0)
-      }).pipe(fs.createWriteStream("maps/elab/" + filename + ".osz"))
-    }
-  })
+var addMap = function(arr) {
+  db.run("INSERT INTO `maps`(`id`, `name`, `saved_version`, `act_exist`, `mightbeupdated`, `retries`) VALUES (?, ?, ?, ?, ?, ?)", arr)
+  currentMapset += 1
+  db.run("UPDATE `stats` SET `current_map_id`=? WHERE 1", currentMapset)
+  getMap()
 }
 
-exports.mirrorStart = function(r) {
-  request = r
-  db.get("SELECT * FROM stats", function(err, row) {
-    if (err)
-      throw err
-    currentMapset = +(row.current_map_id)
-    console.log(currentMapset)
-    getMap()
+var fixAndClose = function() {
+  db.run("DELETE FROM `maps` WHERE `id` > ?", [currentMapset - notExistingCount - 1])
+  db.run("UPDATE `stats` SET `current_map_id` = " + (currentMapset - notExistingCount) + " WHERE 1", function() {
+    // LET THE ENDLESS RECURSION AND CALLBACKING STOP
+    process.exit()
   })
 }
