@@ -31,6 +31,8 @@ var getMap = function() {
   request("https://osu.ppy.sh/api/get_beatmaps?k=" + config.apiKey + "&s=" + currentMapset, function(err, response, body) {
     if (err !== null) 
       console.log("an error happened while downloading " + filename)
+    if (process.env.verbose = "yes")
+      console.log(body)
     if (body == "[]") {
       notExistingCount += 1
       addMap([currentMapset, "", "0000-00-00 00:00:00", "0", "0", "0"])
