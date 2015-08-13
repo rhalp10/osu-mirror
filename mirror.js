@@ -39,21 +39,23 @@ var getMap = function() {
     }
     else {
       notExistingCount = 0
+      exFound = false
       try {
         body = JSON.parse(body)
       }
       catch (ex) {
+        exFound = true
         console.log("Seems like cloudflare has meme'd us. Let's try again in 30 seconds.")
         setTimeout(function() {
           getMap()
         }, 30000)
       }
-      if (typeof body.error !== "undefined") {
+      if (!exFound && typeof body.error !== "undefined") {
         console.log("The osu! API tells us to provide a valid API key. We will retry in 1 minute to do the request, but check the api key is correct"
                   + " in the configuration file, just in case!")
         setTimeout(function() {getMap()}, 60000)
       }
-      else {
+      else if (!exFound) {
         var filename = sanitize(currentMapset + " " + body[0].artist + " - " + body[0].title)
         console.log("Starting download of " + filename)
         request("https://osu.ppy.sh/d/" + currentMapset, function(err) {
