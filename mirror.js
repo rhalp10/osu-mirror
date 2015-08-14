@@ -100,7 +100,7 @@ var addMap = function(arr) {
   db.run("INSERT INTO `maps`(`id`, `name`, `saved_version`, `act_exist`, `mightbeupdated`, `retries`) VALUES (?, ?, ?, ?, ?, ?)", arr)
   currentMapset += 1
   db.run("UPDATE `stats` SET `current_map_id`=? WHERE 1", currentMapset)
-  setTimeout(function() { getMap() }, 3000);
+  setTimeout(function() { getMap() }, 250);
 }
 
 var fixAndClose = function() {
