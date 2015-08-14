@@ -24,7 +24,7 @@ exports.mirrorStart = function(r) {
 }
 
 var getMap = function() {
-  if (notExistingCount > 400) {
+  if (notExistingCount > 1000) {
     fixAndClose();
   }
   console.log("Starting download. s: " + currentMapset + "; notExistingCount: " + notExistingCount);
