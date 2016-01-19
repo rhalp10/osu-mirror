@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html lang="en">
+<!--<![endif]-->
+<!-- HEAD SECTION -->
+<head><link rel="shortcut icon" href="assets/img/logo.ico"/>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!--[if IE]>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <![endif]-->
+    <title>Free Download OSR & OJN by rhalp10</title>
+    <!--GOOGLE FONT -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <!--BOOTSTRAP MAIN STYLES -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+    <!--FONTAWESOME MAIN STYLE -->
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet" />
+     <!--PRETTY PHOTO MAIN STYLE (REQUIRED FOR PORFOLIO)-->
+    <link href="assets/css/prettyPhoto.css" rel="stylesheet" />
+    <!--CUSTOM STYLE -->
+    <link href="assets/css/style.css" rel="stylesheet" />
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+</head>
+    <!--END HEAD SECTION -->
+<body >   
+     <!-- NAV SECTION -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                                <!--LOGO-->
+<a class="navbar-brand" href="#"><a class="navbar-brand" href="#"><img src="assets/img/logo.png" alt="">
+</a>
+<!--LOGO END-->
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="about.html">ABOUT</a></li>
+                    <li><a href="song.html">SONGS</a></li>
+                     <li><a href="video.html">VIDEOS</a></li>
+                    <li><a href="webarchitect.html">WEB ARCHITECT</a></li>
+                    <li><a href="contact.html">CONTACT</a></li>
+                </ul>
+            </div>
+           
+        </div>
+    </div>
+     <!--END NAV SECTION -->
+     
+    <!--PORTFOLIO SECTION -->
+    <div id="porfolio-section" >
+        <div class="container" >
+            <div class="row main-top-margin text-center">
+                <div class="col-md-8 col-md-offset-2 " >
+                    <h1>Map List</h1>
+                    <h4>
+                       Download Your Favorite O2Jam Map And Also You Can Download The OJN Converted to OSU! Mania Maps . 
+                    </h4>
+                </div>
+            </div>
+            <!-- ./ Main Heading-->
+            <!-- ./ SEARCH ENGINE-->
+            <form id="search" action="search.php" method="GET" accept-charset="utf-8">
+   <input type="text" name="s" />
+   <a onclick="document.getElementById('search').submit()">Search</a>
+</form>
+<!-- ./ SEARCH ENGINE-->
+             <div class="row  main-low-margin text-center">
+           <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 " >
+
+                    <div class="text-center">
+                        <ul class="portfolio-filter">
+                            <li><a class="btn btn-primary active margin-5" href="#" data-filter="*">All</a></li>
+                            <li><a class="btn btn-primary margin-5" href="#" data-filter=".o2">O2Mania</a></li>
+                            <li><a class="btn btn-primary margin-5" href="#" data-filter=".osu">OSU!Mania</a></li>
+                           
+                        </ul>
+
+                    </div>
+                </div>
+<!-- ./ Filter Head div-->
+                <div class="col-md-10 col-md-offset-1 col-sm-12" >
+                    <ul class="portfolio-items col-3">
+<li class="portfolio-item osu">
+                            <div class="item-main">
+                                <div class="portfolio-image">
+                                    <img src="assets/img/portfolio/thumb/t8.jpg" alt="">
+                                    <div class="overlay">
+                                        <a class="preview btn btn-primary" title="xi - Happy End of the World " href="assets/img/portfolio/big/b8.jpg"><i class=" fa fa-eye"></i></a>
+                                    </div>
+                                </div><font color = white><marquee>xi - Happy End of the World</marquee></font>
+                                <h5><pre>DOWNLOAD: 
+<a href="http://bloodcat.com/osu/s/171880"><i class="fa fa-download"></a></i>&nbsp;&nbsp;&nbsp;OSR</pre></h5>
+                            
+                        </li>
+<li class="portfolio-item osu">
+                            <div class="item-main">
+                                <div class="portfolio-image">
+                                    <img src="assets/img/portfolio/thumb/t9.jpg" alt="">
+                                    <div class="overlay">
+                                        <a class="preview btn btn-primary" title="Qrispy Joybox - cloche " href="assets/img/portfolio/big/b9.jpg"><i class=" fa fa-eye"></i></a>
+                                    </div>
+                                </div><font color = "white">Qrispy Joybox - cloche</font>
+                                <h5><pre>DOWNLOAD: 
+<a href="http://bloodcat.com/osu/s/364958"><i class="fa fa-download"></a></i>&nbsp;&nbsp;&nbsp;OSR</pre></h5>
+                            
+                        </li>
+<li class="portfolio-item osu">
+                            <div class="item-main">
+                                <div class="portfolio-image">
+                                    <img src="assets/img/portfolio/thumb/t10.jpg" alt="">
+                                    <div class="overlay">
+                                        <a class="preview btn btn-primary" title="Halozy - Kanshou no Matenrou" href="assets/img/portfolio/big/b10.jpg"><i class=" fa fa-eye"></i></a>
+                                    </div>
+                                </div><font color = white><marquee>Halozy - Kanshou no Matenrou</marquee></font>
+                                <h5><pre>DOWNLOAD: 
+<a href="http://bloodcat.com/osu/s/350528"><i class="fa fa-download"></a></i>&nbsp;&nbsp;&nbsp;OSR</pre></h5>
+                            
+                        </li>
+<li class="portfolio-item osu">
+                            <div class="item-main">
+                                <div class="portfolio-image">
+                                    <img src="assets/img/portfolio/thumb/t11.jpg" alt="">
+                                    <div class="overlay">
+                                        <a class="preview btn btn-primary" title="P*Light feat. mow*2 - OVERDRIVERS" href="assets/img/portfolio/big/b11.jpg"><i class=" fa fa-eye"></i></a>
+                                    </div>
+                                </div><font color = "white"><marquee>P*Light feat. mow*2 - OVERDRIVERS</marquee></font>
+                                <h5><pre>DOWNLOAD: 
+<a href="http://bloodcat.com/osu/s/196172"><i class="fa fa-download"></a></i>&nbsp;&nbsp;&nbsp;OSR</pre></h5>
+                            
+                        </li>
+<li class="portfolio-item osu">
+                            <div class="item-main">
+                                <div class="portfolio-image">
+                                    <img src="assets/img/portfolio/thumb/t12.jpg" alt="">
+                                    <div class="overlay">
+                                        <a class="preview btn btn-primary" title="Doma Umaru [CV.Tanaka Aimi] - Kakushinteki*Metamaruphose! " href="assets/img/portfolio/big/b12.jpg"><i class=" fa fa-eye"></i></a>
+                                    </div>
+                                </div><font color = "white"><marquee>Doma Umaru [CV.Tanaka Aimi] - Kakushinteki*Metamaruphose!</marquee></font>
+                                <h5><pre>DOWNLOAD: 
+<a href="http://bloodcat.com/osu/s/332623"><i class="fa fa-download"></a></i>&nbsp;&nbsp;&nbsp;OSR</pre></h5>
+                            
+                        </li>
+<li class="portfolio-item osu">
+                            <div class="item-main">
+                                <div class="portfolio-image">
+                                    <img src="assets/img/portfolio/thumb/t13.jpg" alt="">
+                                    <div class="overlay">
+                                        <a class="preview btn btn-primary" title="xi - Akasha " href="assets/img/portfolio/big/b13.jpg"><i class=" fa fa-eye"></i></a>
+                                    </div>
+                                </div><font color="white">xi - Akasha</font>
+                                <h5><pre>DOWNLOAD: 
+<a href="http://bloodcat.com/osu/s/87876"><i class="fa fa-download"></a></i>&nbsp;&nbsp;&nbsp;OSR</pre></h5>
+                            
+                        </li>
+<li class="portfolio-item osu">
+                            <div class="item-main">
+                                <div class="portfolio-image">
+                                    <img src="assets/img/portfolio/thumb/t14.jpg" alt="">
+                                    <div class="overlay">
+                                        <a class="preview btn btn-primary" title=" xi - Parousia" href="assets/img/portfolio/big/b14.jpg"><i class=" fa fa-eye"></i></a>
+                                    </div>
+                                </div><font color = "white">xi - Parousia</font>
+                                <h5> <pre>DOWNLOAD: 
+<a href="http://bloodcat.com/osu/s/355601"><i class="fa fa-download"></a></i>&nbsp;&nbsp;&nbsp;OSR</pre></h5>
+                            
+                        </li>
+<li class="portfolio-item osu">
+                            <div class="item-main">
+                                <div class="portfolio-image">
+                                    <img src="assets/img/portfolio/thumb/t15.jpg" alt="">
+                                    <div class="overlay">
+                                        <a class="preview btn btn-primary" title=" ARM - Koisuru*Uchu Sensou!! (Abababa Mix)" href="assets/img/portfolio/big/b15.jpg"><i class=" fa fa-eye"></i></a>
+                                    </div>
+                                </div><font color="white"><marquee>ARM - Koisuru*Uchu Sensou!! (Abababa Mix)</marquee></font>
+                                <h5> <pre>DOWNLOAD: 
+<a href="#"><i class="fa fa-download"></a></i>&nbsp;&nbsp;&nbsp;OSR</pre></h5>
+                            
+                        </li>
+<li class="portfolio-item osu">
+                            <div class="item-main">
+                                <div class="portfolio-image">
+                                    <img src="assets/img/portfolio/thumb/t16.jpg" alt="">
+                                    <div class="overlay">
+                                        <a class="preview btn btn-primary" title=" C-YA - Mother Ship (C-YA Mix)" href="assets/img/portfolio/big/b16.jpg"><i class=" fa fa-eye"></i></a>
+                                    </div>
+                                </div><font color="white"><marquee>C-YA - Mother Ship (C-YA Mix)</marquee></font>
+                                <h5><pre>DOWNLOAD: 
+<a href="#"><i class="fa fa-download"></a></i>&nbsp;&nbsp;&nbsp;OSR</pre></h5>
+                            
+                        </li>
+<li class="portfolio-item osu">
+                            <div class="item-main">
+                                <div class="portfolio-image">
+                                    <img src="assets/img/portfolio/thumb/t17.jpg" alt="">
+                                    <div class="overlay">
+                                        <a class="preview btn btn-primary" title=" Haru Luna - Overfly" href="assets/img/portfolio/big/b17.jpg"><i class=" fa fa-eye"></i></a>
+                                    </div>
+                                </div><font color="white"><marquee>Haru Luna - Overfly (春奈るな  - Overfly)</marquee></font>
+                                <h5><pre>DOWNLOAD: 
+<a href="#"><i class="fa fa-download"></a></i>&nbsp;&nbsp;&nbsp;OSR</pre></h5>
+                            
+                        </li>
+ <li class="portfolio-item o2">
+                            <div class="item-main">
+                                <div class="portfolio-image">
+                                    <img src="assets/img/portfolio/thumb/t18.jpg" alt="">
+                                    <div class="overlay">
+                                        <a class="preview btn btn-primary" title="Richard Clayderman - Souvenirs d'enfance" href="assets/img/portfolio/big/b18.jpg"><i class=" fa fa-eye"></i></a>
+                                    </div>
+                                </div><font color="white"><marquee>Richard Clayderman - Souvenirs d'enfance</marquee></font>
+                                <h5><pre>DOWNLOAD: 
+<a href="#"><i class="fa fa-download"></a></i>&nbsp;&nbsp;OJN&nbsp;&nbsp;&nbsp;<a href="#"><i class="fa fa-download"></a></i>&nbsp;&nbsp;OSR</pre></h5>
+                            
+                        </li>
+ <li class="portfolio-item osu">
+                            <div class="item-main">
+                                <div class="portfolio-image">
+                                    <img src="assets/img/portfolio/thumb/t19.jpg" alt="">
+                                    <div class="overlay">
+                                        <a class="preview btn btn-primary" title="Yuna Ito - Trust You" href="assets/img/portfolio/big/b19.jpg"><i class=" fa fa-eye"></i></a>
+                                    </div>
+                                </div><font color="white">Yuna Ito - Trust You</font>
+                                <h5> <pre>DOWNLOAD: 
+<a href="#"><i class="fa fa-download"></a></i>&nbsp;&nbsp;&nbsp;OSR</pre></h5>
+                            
+                        </li>
+ <li class="portfolio-item osu">
+                            <div class="item-main">
+                                <div class="portfolio-image">
+                                    <img src="assets/img/portfolio/thumb/t20.jpg" alt="">
+                                    <div class="overlay">
+                                        <a class="preview btn btn-primary" title="ARM feat. Nanahira - Bakunana*Testroyer ( ARM feat. ななひら -  爆なな☆てすとロイヤ )" href="assets/img/portfolio/big/b20.jpg"><i class=" fa fa-eye"></i></a>
+                                    </div>
+                                </div><font color="white"><marquee>ARM feat. Nanahira - Bakunana*Testroyer</marquee></font>
+                                <h5><pre>DOWNLOAD: 
+<a href="#"><i class="fa fa-download"></a></i>&nbsp;&nbsp;&nbsp;OSR</pre></h5>
+                            
+                        </li>
+ <li class="portfolio-item o2">
+                            <div class="item-main">
+                                <div class="portfolio-image">
+                                    <img src="assets/img/portfolio/thumb/t1.jpg" alt="">
+                                    <div class="overlay">
+                                        <a class="preview btn btn-primary" title="100-200-400 - Fascination MAXX" href="assets/img/portfolio/big/b2.jpg"><i class=" fa fa-eye"></i></a>
+                                    </div>
+                                </div><font color="white"><marquee>100-200-400 - Fascination MAXX</marquee></font color="white">
+                                <h5><pre>DOWNLOAD: 
+<a href="#"><i class="fa fa-download"></a></i>&nbsp;&nbsp;OJN&nbsp;&nbsp;&nbsp;<a href="#"><i class="fa fa-download"></a></i>&nbsp;&nbsp;&nbsp;OSR</pre></h5>
+                         	
+                        </li>
+      
+ <li class="portfolio-item osu">
+                            <div class="item-main">
+                                <div class="portfolio-image">
+                                    <img src="assets/img/portfolio/thumb/t4.jpg" alt="">
+                                    <div class="overlay">
+                                        <a class="preview btn btn-primary" title="REDALiCE Feat. Ayumi Nomiya - Little Star" href="assets/img/portfolio/big/b4.jpg"><i class=" fa fa-eye"></i></a>
+                                    </div>
+                                </div><font color="white"><marquee>REDALiCE Feat. Ayumi Nomiya - Little Star</marquee></font>
+                               <h5><pre>DOWNLOAD: 
+<a href="#"><i class="fa fa-download"></a></i>&nbsp;&nbsp;&nbsp;OSR</pre></h5>
+                            </div>
+                        </li>
+ 
+ <li class="portfolio-item osu">
+                            <div class="item-main">
+                                <div class="portfolio-image">
+                                    <img src="assets/img/portfolio/thumb/t7.jpg" alt="">
+                                    <div class="overlay">
+                                        <a class="preview btn btn-primary" title="(矢鴇つかさ) Tsukasa Yatoki -  2A-Attack" href="assets/img/portfolio/big/b7.jpg"><i class=" fa fa-eye"></i></a>
+                                    </div>
+                                </div><font color="white"><marquee>(矢鴇つかさ) Tsukasa Yatoki -  2A-Attack</marquee></font>
+                             <h5><pre>DOWNLOAD: 
+<a href="#"><i class="fa fa-download"></a></i>&nbsp;&nbsp;&nbsp;OSR</pre></h5>
+                            </div>
+                        </li>
+ 
+ <li class="portfolio-item osu">
+                            <div class="item-main">
+                                <div class="portfolio-image">
+                                    <img src="assets/img/portfolio/thumb/t5.jpg" alt="">
+                                    <div class="overlay">
+                                        <a class="preview btn btn-primary" title="REDALiCE Feat. Ayumi Nomiya - Little Star" href="assets/img/portfolio/big/b5.jpg"><i class=" fa fa-eye"></i></a>
+                                    </div>
+                                </div><font color="white"><marquee>REDALiCE Feat. Ayumi Nomiya - Little Star</marquee></font>
+                             <h5><pre>DOWNLOAD: 
+<a href="#"><i class="fa fa-download"></a></i>&nbsp;&nbsp;&nbsp;OSR</pre></h5>
+                            </div>
+                        </li>
+
+ <li class="portfolio-item osu">
+                            <div class="item-main">
+                                <div class="portfolio-image">
+                                    <img src="assets/img/portfolio/thumb/t6.jpg" alt="">
+                                    <div class="overlay">
+                                        <a class="preview btn btn-primary" title="(れをる) Reol - (+♂)+Danshi" href="assets/img/portfolio/big/b6.jpg"><i class=" fa fa-eye"></i></a>
+                                    </div>
+                                </div><font color = "white"><marquee>Reol - +Danshi (れをる - +♂)</marquee></font>
+                             <h5><pre>DOWNLOAD: 
+<a href="#"><i class="fa fa-download"></a></i>&nbsp;&nbsp;&nbsp;OSR</pre></h5>
+                            </div>
+</li>
+ <li class="portfolio-item o2">
+                            <div class="item-main">
+                                <div class="portfolio-image">
+                                    <img src="assets/img/portfolio/thumb/t2.jpg" alt="">
+                                    <div class="overlay">
+                                        <a class="preview btn btn-primary" title="Hatsune Miku's - Head Exercises" href="assets/img/portfolio/big/b3.jpg"><i class=" fa fa-eye"></i></a>
+                                    </div>
+                                </div><font color="white"><marquee>Hatsune Miku's - Head Exercises</marquee></font>
+                             <h5><pre>DOWNLOAD: 
+<a href="#"><i class="fa fa-download"></a></i>&nbsp;&nbsp;OJN&nbsp;&nbsp;&nbsp;<a href="#"><i class="fa fa-download"></a></i>&nbsp;&nbsp;&nbsp;OSR</pre></h5>
+                            </div>
+</li>
+
+ <li class="portfolio-item osu">
+                            <div class="item-main">
+                                <div class="portfolio-image">
+                                    <img src="assets/img/portfolio/thumb/t3.jpg" alt="">
+                                    <div class="overlay">
+                                        <a class="preview btn btn-primary" title="(削除)sakuzyo - Imprinting" href="assets/img/portfolio/big/b1.jpg"><i class=" fa fa-eye"></i></a>
+                                    </div>
+                                </div><font color="white"><marquee>(削除)sakuzyo - Imprinting</marquee></font>
+                             <h5><pre>DOWNLOAD: 
+<a href="#"><i class="fa fa-download"></a></i>&nbsp;&nbsp;&nbsp;OSR</pre></h5>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+                 </div>
+        </div>
+    </div>
+    <!-- END PORTFOLIO SECTION -->
+   
+   
+ 
+    <!--FOOTER SECTION -->
+    <div id="footer">
+        <div class="container">
+            <div class="row ">
+                 <center>&copy; 2016, a RADICLM Design www.osu.mania.com | Domain By www.000webhost.com |  All Right Reserved 			</center>	
+				
+		
+            </div>
+            
+        </div>
+       
+    </div>  
+    <!--END FOOTER SECTION --> 
+    <!-- JAVASCRIPT FILES PLACED AT THE BOTTOM TO REDUCE THE LOADING TIME  -->
+    <!-- CORE JQUERY LIBRARY -->
+    <script src="assets/js/jquery.js"></script>
+    <!-- CORE BOOTSTRAP LIBRARY -->
+    <script src="assets/js/bootstrap.min.js"></script>
+            <!--ISOTOPE SCRIPTS-FOR FILTERING (REQUIRED FOR PORFOLIO)-->
+    <script src="assets/js/jquery.isotope.min.js"></script>
+    <!--PRETTYPHOTO SCRIPTS (REQUIRED FOR PORFOLIO)-->
+    <script src="assets/js/jquery.prettyPhoto.js"></script>
+     <!-- CUSTOM SCRIPT-->
+    <script src="assets/js/custom.js"></script>
+</body>
+</html>
